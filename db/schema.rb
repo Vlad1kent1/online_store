@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_065728) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_232723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "firstname", null: false
-    t.string "lastname", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "address", null: false
     t.string "phone", null: false
   end
@@ -26,11 +26,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_065728) do
   create_table "product_orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "products_id", null: false
-    t.bigint "orders_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "order_id", null: false
     t.integer "amount", null: false
-    t.index ["orders_id"], name: "index_product_orders_on_orders_id"
-    t.index ["products_id"], name: "index_product_orders_on_products_id"
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["product_id"], name: "index_product_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -42,6 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_065728) do
     t.integer "balance", null: false
   end
 
-  add_foreign_key "product_orders", "orders", column: "orders_id"
-  add_foreign_key "product_orders", "products", column: "products_id"
+  add_foreign_key "product_orders", "orders"
+  add_foreign_key "product_orders", "products"
 end
