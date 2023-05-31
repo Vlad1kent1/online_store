@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :product do
     name { Faker::Game.title }
     description { Faker::Lorem.paragraph(sentence_count: 3) }
-    price { rand(15.0..99.0) }
-    balance { rand(20..60) }
+    price { Faker::Number.decimal(l_digits: 4, r_digits: 2)  }
+    balance { Faker::Number.digit }
   end
 end
