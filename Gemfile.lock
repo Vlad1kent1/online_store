@@ -215,7 +215,6 @@ DEPENDENCIES
   bootsnap
   debug
   dotenv-rails
-  factory_bot (~> 6.2)
   factory_bot_rails
   faker
   importmap-rails
