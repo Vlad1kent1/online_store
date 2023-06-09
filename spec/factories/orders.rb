@@ -6,4 +6,3 @@ FactoryBot.define do
     phone { Faker::PhoneNumber.cell_phone }
   end
 end
-  

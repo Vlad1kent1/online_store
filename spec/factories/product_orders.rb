@@ -5,4 +5,3 @@ FactoryBot.define do
     amount { Faker::Number.digit }
   end
 end
-  
