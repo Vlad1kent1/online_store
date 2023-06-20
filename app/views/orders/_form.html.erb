@@ -1,0 +1,20 @@
+<%= simple_form_for order, html: { class: "form" } do |form| %>
+  <div class="my-5">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, class: "block shadow rounded-md…" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :address %>
+    <%= form.text_area :address, class: "block shadow rounded-md…" %>
+  </div>
+  
+  <div class="my-5">
+    <%= form.label :phone %>
+    <%= form.text_field :phone, class: "block shadow rounded-md…" %>
+  </div>
+  
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5…" %>
+  </div>
+<% end %>
