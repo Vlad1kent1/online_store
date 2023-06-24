@@ -41,12 +41,10 @@ class Cart::CartManager
   def add_products
     set_product
 
-    if session[:products].key?(product[:id])
-      if amount_greater_balance?
-        session[:products][product[:id]] = product_balance
-      else
-        session[:products][product[:id]] += product[:amount]
-      end
+    if session[:products].has_key?(product[:id])
+      new_amount = amount_greater_balance? ? product_balance : (product[:amount] + session.dig(:products, product[:id]))
+
+      session[:products][product[:id]] = new_amount
     else
       @session[:products].merge!(product[:id] => product[:amount])
     end

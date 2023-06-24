@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.order(:name)
+    @products = Product.all
   end
 
   def new
@@ -36,9 +36,8 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = resourse
-
-    @product.destroy
+    resource.destroy
+    
     redirect_to products_url, notice: "Product was successfully destroyed."
   end
 

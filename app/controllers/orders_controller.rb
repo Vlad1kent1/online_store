@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :check_cart, only: :new
+
   def index
-    @order = collection
+    @order = resourse
   end
 
   def show
@@ -8,7 +10,8 @@ class OrdersController < ApplicationController
   end
 
   def new
-    redirect_to products_path unless session[:products]
+    @session_manager = Cart::CartManager.new(session, params)
+
     @order = Order.new
   end
 
@@ -20,7 +23,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      Orders::Manager.new(session[:products], @order, session).call
+      Orders::OrderManager.new(session[:products], @order, session).call
 
       redirect_to order_path(@order), notice: "Order was successfully created."
     else
@@ -38,11 +41,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def destroy
-    @order = resourse
+  def delete
+    resource.delete
 
-    @order.destroy
-    redirect_to orders_url, notice: "Order was successfully destroyed."
+    redirect_to orders_url, notice: "Order was successfully deleted."
   end
 
   private
@@ -57,5 +59,9 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
+  end
+
+  def check_cart
+    redirect_to products_path unless session[:products].present?
   end
 end
