@@ -1,4 +1,4 @@
-class Orders::Manager
+class Orders::OrderManager
   attr_reader :products_hash, :order, :current_session
 
   def initialize(products_hash, order, current_session)
