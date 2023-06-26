@@ -1,5 +1,4 @@
 class Orders::OrderManager
-  attr_reader :products_hash, :order, :current_session
 
   def initialize(products_hash, order, current_session)
     @products_hash = products_hash

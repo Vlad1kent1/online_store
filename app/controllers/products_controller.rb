@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = collection
   end
 
   def new
@@ -36,15 +36,20 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    resource.destroy
+    @product = resourse
+    @product.destroy
     
-    redirect_to products_url, notice: "Product was successfully destroyed."
+    redirect_to products_url, notice: "Product was successfully deleted."
   end
 
   private
 
+  def collection
+    Product.ordered
+  end
+
   def resourse
-    Product.all.find(params[:id])
+    collection.find(params[:id])
   end
 
   def product_params

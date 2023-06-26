@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     resource.delete
 
     redirect_to orders_url, notice: "Order was successfully deleted."
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
   private
 
   def collection
-    Order.all
+    Order.ordered
   end
 
   def resourse

@@ -1,5 +1,5 @@
 class Cart::CartManager
-  attr_reader :session, :params, :product, :product_balance
+  attr_reader :session, :params
   attr_accessor :notice
 
   def initialize(session, params = {})
@@ -8,20 +8,8 @@ class Cart::CartManager
   end
 
   def call
-    case params[:update_action]
-
-    when 'buy'
-      add_products
-      "Product was added to cart."
-
-    when 'change'
-      update_products
-      "Amount was changed"
-
-    when 'delete'
-      delete_products
-      "Product was removed"
-    end
+    service = "Cart::#{params[:action_type].to_s.capitalize}Products".constantize
+    service.call(session, set_product)
   end
 
   def items
@@ -37,28 +25,6 @@ class Cart::CartManager
   end
 
   private
-
-  def add_products
-    set_product
-
-    if session[:products].has_key?(product[:id])
-      new_amount = amount_greater_balance? ? product_balance : (product[:amount] + session.dig(:products, product[:id]))
-
-      session[:products][product[:id]] = new_amount
-    else
-      @session[:products].merge!(product[:id] => product[:amount])
-    end
-  end
-
-  def update_products
-    set_product
-
-    session[:products][product[:id]] = product[:amount]
-  end
-
-  def delete_products
-    session[:products].delete(params[:id])
-  end
 
   def set_product
     @product = {

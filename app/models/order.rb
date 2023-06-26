@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  scope :ordered, -> { order(last_name: :asc) }
+
   has_many :product_orders, dependent: :destroy
   has_many :products, through: :product_orders
 
