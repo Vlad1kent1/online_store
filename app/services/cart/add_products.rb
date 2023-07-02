@@ -1,6 +1,5 @@
 class Cart::AddProducts < ApplicationService
   attr_reader :session, :product
-  attr_accessor :notice
 
   def initialize(session, product)
     @session = session
@@ -20,7 +19,6 @@ class Cart::AddProducts < ApplicationService
   def available_amount
     desired_amount = product[:amount] + session.dig(:products, product[:id])
 
-    # check if desired amount isn't greater than balance + already shipped amount
     [product[:balance], desired_amount].min
   end
 end

@@ -2,7 +2,7 @@ class CartController < ApplicationController
   before_action :init_cart, only: :update
   
   def index
-    # @cart = Cart::CartManager.new(session, params)
+    @cart = Cart::CartManager.new(session, params)
   end
 
   def update

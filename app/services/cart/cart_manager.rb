@@ -8,8 +8,10 @@ class Cart::CartManager
   end
 
   def call
-    service = "Cart::#{params[:action_type].to_s.capitalize}Products".constantize
-    service.call(session, set_product)
+    set_product 
+
+    service = "Cart::#{params[:action_type].classify}Products".constantize
+    service.new(session, set_product).call
   end
 
   def items
