@@ -12,6 +12,8 @@ class Cart::AddProducts < ApplicationService
     else
       @session[:products].merge!(product[:id] => product[:amount])
     end
+
+    "Product was added"
   end
 
   private

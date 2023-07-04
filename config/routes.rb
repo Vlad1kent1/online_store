@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "products#index"
 
+  resources :cart
+
   resources :products do
     member do
       resource :cart, only: [:update] do
@@ -11,6 +13,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cart
   resources :orders
 end

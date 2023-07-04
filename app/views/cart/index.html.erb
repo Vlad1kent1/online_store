@@ -25,7 +25,7 @@
                     <td class="px-6 py-4 whitespace-nowrap"><%= number_to_currency(product.price, unit:"₴") %></td>
                     <td class="px-6 py-4 whitespace-nowrap"><%= render "cart/change_amount_form", product: product %></td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <%= button_to remove_products_to_cart_path(product) do %>
+                      <%= button_to remove_products_to_cart_path(product), method: :patch do %>
                           <%= image_tag "trash.svg", size: "30x30" %>
                       <% end %>
                     </td>

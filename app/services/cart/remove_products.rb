@@ -7,7 +7,7 @@ class Cart::RemoveProducts
   end
 
   def call
-    session[:products].delete(params[:id])
+    session[:products].delete(product[:id])
 
     "Product was removed"
   end

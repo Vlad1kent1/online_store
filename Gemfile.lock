@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/loqimean/simple_form
+  revision: 0641503244fbf3da4ee3bd091a03d9ac410af465
+  specs:
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -89,6 +97,8 @@ GEM
       railties (>= 5.0.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.13.0)
@@ -221,6 +231,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  font-awesome-rails
   importmap-rails
   pg (~> 1.1)
   puma (~> 5.0)
@@ -228,6 +239,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails (~> 6.0.0)
   shoulda-matchers (~> 5.0)
+  simple_form!
   sprockets-rails
   stimulus-rails
   tailwindcss-rails

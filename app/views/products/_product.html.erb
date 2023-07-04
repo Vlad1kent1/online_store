@@ -1,7 +1,6 @@
 <div class="flex w-1/4 flex-wrap">
   <div class="w-full p-1 md:p-2">
     <div class="bg-violet-400 text-white p-4" id="<%= dom_id product %>">
-
       <div class="grid gap-4 grid-cols-1">
         <div class="font-semibold text-3xl truncate ...">
           <%= product.name %>
@@ -21,13 +20,13 @@
       </div>
 
       <div class="flex justify-between">
-      <%= link_to "Show this product", product, class:"black-button mt-5" %>
-      <%= link_to "Edit", edit_product_path(product), class: "btn-success mt-5" %>
-      <%= button_to "Delete", product, method: :delete, class: "btn-danger mt-5" %>
+      <%= link_to "Show this product", product %>
+      <%= link_to "Edit", edit_product_path(product) %>
+      <%= button_to "Delete", product, method: :delete %>
     </div>
       <hr class="mt-6">
 
-      <div class="relative mb-3">
+      <div class="relative mb-3 text-black">
         <% if product.balance.positive? %>
           <%= render "cart/buy_form", product: product %>
         <% end %>
