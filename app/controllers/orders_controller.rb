@@ -1,17 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :check_cart, only: :new
-
-  def index
-    @order = resourse
-  end
+  before_action :check_cart, only: [:new, :create]
 
   def show
     @order = resourse
   end
 
   def new
-    @session_manager = Cart::CartManager.new(session, params)
-
     @order = Order.new
   end
 
@@ -42,9 +36,9 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    resource.delete
+    resourse.delete
 
-    redirect_to orders_url, notice: "Order was successfully deleted."
+    redirect_to products_path, notice: "Order successfully deleted."
   end
 
   private
@@ -62,6 +56,8 @@ class OrdersController < ApplicationController
   end
 
   def check_cart
-    redirect_to products_path unless session[:products].present?
+    redirect_to products_path if session[:products].blank?
+
+    @session_manager = Cart::CartManager.new(session, params)
   end
 end

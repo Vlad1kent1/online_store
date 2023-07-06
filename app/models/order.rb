@@ -6,13 +6,12 @@ class Order < ApplicationRecord
 
   validates :first_name, :last_name, :address, :phone, presence: true
   
-  
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def product_sum(product)
-    ProductOrder.joins(:product).where(order_id: id, product_id: product_id).sum('product_orders.amount * products.price')
+    ProductOrder.joins(:product).where(order_id: id, product_id: product.id).sum('product_orders.amount * products.price')
   end
 
   def product_amount(product)
