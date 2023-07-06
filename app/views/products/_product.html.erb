@@ -19,10 +19,10 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
-      <%= link_to "Show this product", product %>
-      <%= link_to "Edit", edit_product_path(product) %>
-      <%= button_to "Delete", product, method: :delete %>
+      <div class="flex justify-between pt-5">
+      <%= link_to "Show this product", product, class: "text-white bg-violet-800 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+      <%= link_to "Edit", edit_product_path(product), class: "text-white bg-teal-400 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+      <%= button_to "Delete", product, method: :delete, class: "text-white bg-rose-400 font-medium rounded-lg px-5 py-2.5 text-sm" %>
     </div>
       <hr class="mt-6">
 
