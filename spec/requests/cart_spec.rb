@@ -4,50 +4,58 @@ RSpec.describe "Cart", type: :request do
   let!(:product) { create(:product) }
 
   describe "GET /cart" do
-    it "renders the cart page" do
-      get cart_path
+    it "renders the empty cart page" do
+      get cart_index_path
 
       expect(response).to be_successful
     end
+
+    it "renders the cart page wity product" do
+      post add_product_in_cart_path(product)
+      get cart_index_path
+
+      expect(response).to be_successful
+      expect(response.body).to include(product.name)
+    end
   end
 
-  describe "POST /products/:id/buy" do
+  describe "POST #buy" do
     it "adds the product to the cart" do
-      post buy_product_path(product), params: { update_action: 'buy' }
+      post add_product_in_cart_path(product)
 
-      expect(session[:products][product.id.to_s]).to be_present
+      expect(session.dig(:products, product.id.to_s)).to be_present
     end
 
     it "redirects back to the previous page" do
-      post buy_product_path(product)
+      post add_product_in_cart_path(product)
 
       expect(response).to redirect_to(request.referrer || root_path)
     end
   end
 
-  describe "POST /products/:id/change_amount" do
+  describe "POST #change_amount" do
     let(:amount) { 5 }
 
     it "updates the product amount in the cart" do
-      post change_amount_product_path(product), params: { update_action: 'change', amount: }
-      expect(session[:products][product.id.to_s]).to eq(amount)
+      post update_amount_product_in_cart_path(product), params: { amount: }
+      expect(session.dig(:products, product.id.to_s)).to eq(amount)
     end
 
     it "redirects back to the previous page" do
-      post change_amount_product_path(product), params: { amount: }
+      post update_amount_product_in_cart_path(product), params: { amount: }
       expect(response).to redirect_to(request.referrer || root_path)
     end
   end
 
-  describe "POST /products/:id/cancel_shipping" do
+  describe "POST #cancel_shipping" do
     it "removes the product from the cart" do
-      post cancel_shipping_product_path(product), params: { update_action: 'delete' }
+      post remove_product_in_cart_path(product)
 
       expect(session[:products]).to be_nil
     end
 
     it "redirects back to the previous page" do
-      post cancel_shipping_product_path(product)
+      post remove_product_in_cart_path(product)
 
       expect(response).to redirect_to(request.referrer || root_path)
     end
@@ -55,13 +63,13 @@ RSpec.describe "Cart", type: :request do
 
   describe "DELETE /clean_cart" do
     it "clears the cart" do
-      delete clean_cart_path
+      delete cart_path(1)
 
       expect(session[:products]).to be_nil
     end
 
     it "redirects to the products page" do
-      delete clean_cart_path
+      delete cart_path(1)
 
       expect(response).to redirect_to(products_path)
     end
