@@ -1,0 +1,43 @@
+<div class="min-w-fit rounded-lg shadow-lg m-4 p-6 bg-purple-950 flex flex-col justify-between">
+  <dl class="min-w-full text-white bg-purple-950 divide-y divide-gray-700">
+  <div class="block block-shadow p-6">
+    <ul class="ms-6 w-96">
+      <h1 class="font-bold text-3xl mb-5">Order №<%= order.id %></h1>
+      <li class="mb-4"><%= order.full_name %></li>
+      <li class="mb-4"><%= order.address %></li>
+      <li class="mb-4"><%= order.phone %></li>
+    </ul>
+    <table class="min-w-full text-left text-sm font-light">
+      <thead class="border-b font-medium dark:border-neutral-500 text-left">
+        <tr>
+          <th scope="col" class="pe-6 py-4">Title</th>
+          <th scope="col" class="pe-6 py-4">Price</th>
+          <th scope="col" class="pe-6 py-4">Amount</th>
+          <th scope="col" class="pe-6 py-4">Sum</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% order.products.each do |product| %>
+          <tr class="border-b">
+            <td class="cart-item"><%= product.name %></td>
+            <td class="cart-item"><%= number_to_currency(product.price, unit: "₴ ") %></td>
+            <td class="cart-item"><%= order.product_amount(product) %></td>
+            <td class="cart-item"><%= number_to_currency(order.product_sum(product), unit: "₴ ") %></td>
+          </tr>
+        <% end %>
+        <tr class="border-b">
+          <td colspan="3" class="whitespace-nowrap font-medium pe-11 py-2 text-right">
+            Total sum
+          </td>
+          <td class="whitespace-nowrap pe-6 py-2"><%= number_to_currency(order.total_sum, unit: "₴ ") %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="flex justify-between pt-5">
+      <%= link_to "Show this order", order, class: "text-white bg-violet-800 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+      <%= link_to 'Edit this order', edit_order_path(order), class: "text-white bg-teal-400 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+      <%= link_to 'Back to products', products_path, class: "text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+    </div>
+  </div>
+</div>

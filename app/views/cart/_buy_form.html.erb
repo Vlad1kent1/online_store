@@ -1,0 +1,4 @@
+<%= form_with url: add_products_to_cart_path(product), method: :patch do |f| %>
+  <%= f.number_field :amount, class:'input-field w-[100px] h-[37px] inline-block', value:session.dig(:products, product.id.to_s),  min: 1 %>
+  <%= f.submit "Add to cart", class:"text-white" %>
+<% end %>

@@ -1,0 +1,25 @@
+<%= form_with(model: order, class: "contents") do |f| %>
+  <div class="my-5">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "block shadow rounded-md…" %>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "block shadow rounded-md…" %>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :address %>
+    <%= f.text_area :address, class: "block shadow rounded-md…" %>
+  </div>
+  
+  <div class="my-5">
+    <%= f.label :phone %>
+    <%= f.text_field :phone, class: "block shadow rounded-md…" %>
+  </div>
+  
+  <div class="inline">
+    <%= f.submit class: "text-white bg-teal-400 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+  </div>
+<% end %>
