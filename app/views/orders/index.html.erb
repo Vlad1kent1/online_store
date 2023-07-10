@@ -1,14 +1,8 @@
 <div class="container mx-auto flex-wrap">
-  <% if @orders.count > 0 %>
     <h2 class="text-gray-900 my-4 text- font-sans text-center font-bold text-4xl">
     All Orders
     </h2>
     <div class="flex flex-wrap justify-center">
-     <%= render @orders %>
+     <%= render @order %>
     </div>
-  <% else %>
-    <div class="p-4 mb-4 text-sm text-center rounded-lg bg-gray-800 text-white w-[200px] mx-auto mt-28">
-      You have no orders yet
-    </div>
-  <% end %>
 </div>

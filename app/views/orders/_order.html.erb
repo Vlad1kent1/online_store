@@ -1,61 +1,43 @@
-<div class="min-w-fit rounded-lg shadow-lg m-4 p-6 bg-gray-900 flex flex-col justify-between">
-  <dl class="min-w-full text-white bg-gray-900 divide-y divide-gray-700">
-    <div class="flex flex-col pb-3">
-      <dt class="mb-1 text-gray-400 md:text-sm">Full name</dt>
-      <dd class="text-sm font-semibold"><%= order.full_name %></dd>
-    </div>
-    <div class="flex flex-col py-3">
-      <dt class="mb-1 text-gray-400 md:text-sm">Home address</dt>
-      <dd class="text-sm font-semibold"><%= order.address %></dd>
-    </div>
-    <div class="flex flex-col pt-3 mb-4">
-      <dt class="mb-1 text-gray-400 md:text-sm">Phone number</dt>
-      <dd class="text-sm font-semibold"><%= order.phone %></dd>
-    </div>
-    <div class="flex flex-col pt-3 mb-4">
-      <dt class="mb-1 text-gray-400 md:text-sm">Order date</dt>
-      <dd class="text-sm font-semibold"><%= order.created_at %></dd>
-    </div>
-  </dl>
-  <div class="relative mb-4 rounded-lg">
-    <table class="min-w-full mx-auto text-sm text-left text-gray-400">
-      <thead class="text-xs text-gray-400 uppercase bg-gray-700">
+<div class="min-w-fit rounded-lg shadow-lg m-4 p-6 bg-purple-950 flex flex-col justify-between">
+  <dl class="min-w-full text-white bg-purple-950 divide-y divide-gray-700">
+  <div class="block block-shadow p-6">
+    <ul class="ms-6 w-96">
+      <h1 class="font-bold text-3xl mb-5">Order №<%= order.id %></h1>
+      <li class="mb-4"><%= order.full_name %></li>
+      <li class="mb-4"><%= order.address %></li>
+      <li class="mb-4"><%= order.phone %></li>
+    </ul>
+    <table class="min-w-full text-left text-sm font-light">
+      <thead class="border-b font-medium dark:border-neutral-500 text-left">
         <tr>
-          <th scope="col" class="px-6 py-3">Product name</th>
-          <th scope="col" class="px-6 py-3">Amount</th>
-          <th scope="col" class="px-6 py-3">Total price</th>
+          <th scope="col" class="pe-6 py-4">Title</th>
+          <th scope="col" class="pe-6 py-4">Price</th>
+          <th scope="col" class="pe-6 py-4">Amount</th>
+          <th scope="col" class="pe-6 py-4">Sum</th>
         </tr>
       </thead>
+
       <tbody>
-        <% order.product_orders.each do |i| %>
-          <tr class="bg-gray-900 border-b border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-400 whitespace-nowrap">
-              <%= i.product.name %>
-            </th>
-            <td class="px-6 py-4"><%= i.amount %></td>
-            <td class="px-6 py-4">
-              <%= number_to_currency(i.product_total_sum) %>
-            </td>
+        <% order.products.each do |product| %>
+          <tr class="border-b">
+            <td class="cart-item"><%= product.name %></td>
+            <td class="cart-item"><%= number_to_currency(product.price, unit: "₴ ") %></td>
+            <td class="cart-item"><%= order.product_amount(product) %></td>
+            <td class="cart-item"><%= number_to_currency(order.product_sum(product), unit: "₴ ") %></td>
           </tr>
         <% end %>
-      </tbody>
-      <tfoot>
-        <tr class="font-semibold text-white bg-gray-900">
-          <th scope="row" class="px-6 py-3 text-base">Total</th>
-          <td class="px-6 py-3">
-            <%= order.total_amount %>
+        <tr class="border-b">
+          <td colspan="3" class="whitespace-nowrap font-medium pe-11 py-2 text-right">
+            Total sum
           </td>
-          <td class="px-6 py-3">
-            <%= number_to_currency(order.total_sum) %>
-          </td>
+          <td class="whitespace-nowrap pe-6 py-2"><%= number_to_currency(order.total_sum, unit: "₴ ") %></td>
         </tr>
-      </tfoot>
+      </tbody>
     </table>
-  </div>
-   <%= link_to 'Edit this order', edit_order_path(@order), class: "grey-button" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Delete all products', clean_cart_path, method: :delete, class: "grey-button ms-0" %>  
-     </div>
-    <%= link_to 'Back to products', products_path, class: "grey-button" %>
+    <div class="flex justify-between pt-5">
+      <%= link_to "Show this order", order, class: "text-white bg-violet-800 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+      <%= link_to 'Edit this order', edit_order_path(order), class: "text-white bg-teal-400 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+      <%= link_to 'Back to products', products_path, class: "text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+    </div>
   </div>
 </div>

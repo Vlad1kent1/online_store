@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
   before_action :check_cart, only: [:new, :create]
 
+  def index
+    @order = collection
+  end
+
   def show
     @order = resourse
   end
@@ -33,12 +37,6 @@ class OrdersController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    resourse.delete
-
-    redirect_to products_path, notice: "Order successfully deleted."
   end
 
   private
