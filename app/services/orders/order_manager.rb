@@ -11,8 +11,10 @@ class Orders::OrderManager
     if create_product_relations
       decrease_product_balance
       clean_cart
+
+      true
     else
-      "Something went wrong"
+      false 
     end
   end
 

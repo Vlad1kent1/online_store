@@ -1,10 +1,6 @@
 class OrdersController < ApplicationController
   before_action :check_cart, only: [:new, :create]
-  attr_accessor :notice, :flash_error
-
-  def index
-    @order = collection
-  end
+  attr_accessor :notice, :alert
 
   def show
     @order = resourse
@@ -14,29 +10,21 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def edit
-    @order = resourse
-  end
-
   def create
     @order = Order.new(order_params)
 
     if @order.save
       service = Orders::OrderManager.new(session[:products], @order, session).call
 
-      redirect_to order_path(@order), alert: service
+      if service 
+        flash.notice = "Order was succesfully created"
+      else
+        flash.alert = "Something went wrong"
+      end
+
+      redirect_to order_path(@order)
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    @order = resourse
-
-    if @order.update(order_params)
-      redirect_to @order, notice: "Order was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -2,10 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-.notice-flash {
-  @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block;
-}
-
-.alert-flash {
-  @apply py-2 px-3 bg-rose-50 mb-5 text-rose-500 font-medium rounded-lg inline-block;
-}
+@import 'components/flash_messages';
