@@ -8,18 +8,19 @@ class Cart::CartManager
   end
 
   def call
-    set_product 
+    get_product 
 
-    service = "Cart::#{params[:action_type].classify}Products".constantize
-    service.new(session, set_product).call
+    action = params[:action_type].classify
+    service = "Cart::#{action}Products".constantize
+    service.new(session, get_product).call
   end
 
-  def items
+  def get_realised_items
     Product.find(session[:products].keys)
   end
 
   def sum
-    items.map { |product| session[:products][product.id.to_s] * product.price }.sum
+    get_realised_items.map { |product| session[:products][product.id.to_s] * product.price }.sum
   end
 
   def product_sum(product)
@@ -28,7 +29,7 @@ class Cart::CartManager
 
   private
 
-  def set_product
+  def get_product
     product = Product.find(params[:id])
 
     return if product.nil?

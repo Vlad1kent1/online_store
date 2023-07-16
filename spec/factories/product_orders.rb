@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :product_order do
     product
     order
-    amount { 1 }
+    amount { Faker::Number.digit }
   end
 end

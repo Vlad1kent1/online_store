@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :check_cart, only: [:new, :create]
+  attr_accessor :notice, :flash_error
 
   def index
     @order = collection
@@ -21,9 +22,9 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      Orders::OrderManager.new(session[:products], @order, session).call
+      service = Orders::OrderManager.new(session[:products], @order, session).call
 
-      redirect_to order_path(@order), notice: "Order was successfully created."
+      redirect_to order_path(@order), alert: service
     else
       render :new, status: :unprocessable_entity
     end

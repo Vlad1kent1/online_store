@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-} */
+.notice-flash {
+  @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block;
+}
+
+.alert-flash {
+  @apply py-2 px-3 bg-rose-50 mb-5 text-rose-500 font-medium rounded-lg inline-block;
+}

@@ -1,15 +1,17 @@
 <div class="min-h-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
-      <%= notice %>
-    </p>
-  <% end %>
-
   <div class="flex justify-between items-center pb-8">
     <h1 class="mx-auto text-lg font-bold text-4xl">Products</h1>
   </div>
 
   <table id="products" class="mx-auto">
+    <tbody>
+      <div class="container mx-auto px-5 py-2">
+        <div class="-m-1 flex flex-wrap md:-m-2">
+          <%= render @products %>
+        </div>
+      </div>
+    </tbody>
+    
     <tfoot>
       <tr>
         <td colspan="3">
@@ -19,13 +21,5 @@
         </td>
       </tr>
     </tfoot>
-    
-    <tbody>
-      <div class="container mx-auto px-5 py-2">
-        <div class="-m-1 flex flex-wrap md:-m-2">
-          <%= render @products %>
-        </div>
-      </div>
-    </tbody>
   </table>
 </div>
