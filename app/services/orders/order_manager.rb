@@ -8,11 +8,12 @@ class Orders::OrderManager
   end
 
   def call
-    create_product_relations
-
-    decrease_product_balance
-
-    clean_cart
+    if create_product_relations
+      decrease_product_balance
+      clean_cart
+    else
+      "Something went wrong"
+    end
   end
 
   private
