@@ -1,7 +1,6 @@
 class Cart::CartManager
   attr_reader :session, :params
-  attr_accessor :notice
-
+  
   def initialize(session, params)
     @session = session
     @params = params
