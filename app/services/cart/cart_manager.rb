@@ -15,11 +15,19 @@ class Cart::CartManager
   end
 
   def get_realised_items
-    Product.find(session[:products].keys)
+    begin
+      if session[:products].present?
+        Product.find(session[:products].keys)
+      end      
+    rescue ActiveRecord::RecordNotFound
+      session.delete(:products)
+    end      
   end
 
   def sum
-    get_realised_items.map { |product| session[:products][product.id.to_s] * product.price }.sum
+    if get_realised_items.present?
+      get_realised_items.map { |product| session[:products][product.id.to_s] * product.price }.sum
+    end
   end
 
   def product_sum(product)
