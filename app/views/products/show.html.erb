@@ -1,0 +1,32 @@
+<div class="mx-auto">
+  <div class="w-full p-1 md:p-2 m-5">
+    <div class="grid gap-4 grid-cols-1">
+      <div class="font-semibold text-3xl text-center">
+        <%= @product.name %>
+      </div>
+
+      <div>
+        <%= @product.description %> 
+      </div>
+
+      <div>
+        Price: <%= number_to_currency(@product.price, precision: 2, unit:"₴") %>
+      </div>
+
+      <div>
+        Available: <%= @product.balance %>
+      </div>
+    </div>
+
+    <div class="relative mb-3">
+      <% if @product.balance.positive? %>
+        <%= render "cart/buy_form", product: @product %>
+      <% end %>
+    </div>
+
+    <div class="inline-block ml-2">
+      <%= link_to 'Back to products', products_path, class: "text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+    </div>
+
+  </div>
+</div>

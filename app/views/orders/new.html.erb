@@ -1,0 +1,8 @@
+<div class="container p-4">
+  <h2 class="text-gray-900 mb-4 text- font-sans text-center font-bold text-4xl">
+    New Order
+  </h2>
+  <%= render "form", order: @order %>
+
+    <%= link_to 'Back to cart', cart_index_path, class: "text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+</div>

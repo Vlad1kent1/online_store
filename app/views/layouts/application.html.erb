@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OnlineShop</title>
+    <title>Online Shop</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,9 +11,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="flex flex-col min-h-screen">
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/flash_messangers' %>
+
+    <div class="flex-grow">
       <%= yield %>
-    </main>
+    </div>
+
+    <%= render 'layouts/footer' %>
   </body>
 </html>
